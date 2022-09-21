@@ -1,0 +1,36 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsd="http://www.w3.org/2001/XMLSchema-instance"
+       xsd:schemaLocation="http://www.springframework.org/schema/batch
+    http://www.springframework.org/schema/batch/spring-batch-3.0.xsd
+    http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-4.2.xsd
+">
+    <bean id="demoReader"
+          class="com.project.demo.other.Reader" scope="step">
+<!--        <property name="queryTimeout" value="0"/>-->
+    </bean>
+
+    <bean id="demoProcessor" class="com.project.demo.other.Processor" scope="step">
+
+    </bean>
+
+    <bean id="demoWriter" class="com.project.demo.App.Writer" scope="step">
+
+    </bean>
+
+    <job id="demoJob"
+         xmlns="http://www.springframework.org/schema/batch">
+        <step id="step1">
+            <tasklet>
+                <chunk reader="demoReader" processor="demoProcessor"
+                       writer="demoWriter" commit-interval="10"/>
+<!--                <listeners>-->
+<!--                    <listener ref="customStepListener" />-->
+<!--                    <listener ref="errorListener"/>-->
+<!--                </listeners>-->
+            </tasklet>
+<!--            <next on="COMPLETED" to="emptyPremiumCore"></next>-->
+<!--            <next on="FAILED" to="failureMail"></next>-->
+        </step>
+    </job>
+</beans>
