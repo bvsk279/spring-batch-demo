@@ -18,7 +18,7 @@ public class App {
 
     public static void main(String[] args) throws Exception {
 
-        String[] springConfig  =  { "jobs/csv-to-db.xml" }; //jobs/demo-job.xml
+        String[] springConfig  =  { "jobs/csv-to-solr.xml" }; //jobs/demo-job.xml
 
         // Creating the application context object
         ApplicationContext context = new ClassPathXmlApplicationContext(springConfig);
@@ -27,7 +27,7 @@ public class App {
         JobLauncher jobLauncher = (JobLauncher) context.getBean("jobLauncher");
 
         // Creating the job
-        Job job = (Job) context.getBean("csvToDbJob"); //demoJob
+        Job job = (Job) context.getBean("csvToSolr"); //demoJob
 
         // Executing the JOB
         JobExecution execution = jobLauncher.run(job, new JobParameters());
